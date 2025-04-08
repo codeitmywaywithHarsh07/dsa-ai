@@ -1,6 +1,6 @@
 // pages/dsa-tracker.tsx
 'use client'
-import DSATable from '@/components/Table';
+import DSATable, { DSAProblem, ProblemStatus } from '@/components/Table';
 import { useState } from 'react';
 
 const DSATrackerPage = () => {

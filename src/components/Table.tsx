@@ -13,7 +13,7 @@ import { SiGeeksforgeeks, SiLeetcode } from "react-icons/si";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { CgNotes } from "react-icons/cg";
 
-type ProblemStatus = "Not Started" | "In Progress" | "Completed" | "Revisited";
+export type ProblemStatus = "Not Started" | "In Progress" | "Completed" | "Revisited";
 
 export type DSAProblem = {
   id: number;
@@ -31,7 +31,7 @@ type ColumnDefinition<T, K extends keyof T> = {
   key: K;
   header: string;
   width?: number | string;
-  render?: (value: T[K], row: T) => React.ReactNode;
+  render?: (value: any, row: any) => React.ReactNode;
   align?: "left" | "center" | "right";
 };
 
@@ -132,7 +132,7 @@ const DSATable: React.FC<DSATableProps> = ({
     onBookmarkToggle(problemId, !currentBookmarkStatus);
   };
 
-  const columns: ColumnDefinition<DSAProblem, keyof DSAProblem>[] = [
+  const columns: ColumnDefinition<any, keyof any>[] = [
     {
       key: "id",
       header: "Serial No.",
@@ -143,7 +143,7 @@ const DSATable: React.FC<DSATableProps> = ({
       key: "isBookmarked",
       header: "",
       width: "5%",
-      render: (value: boolean | undefined, row: DSAProblem) => (
+      render: (value: boolean | undefined, row: any) => (
         <button
           onClick={() => toggleBookmark(row.id, value || false)}
           className="text-xl hover:text-yellow-500 transition-colors"
@@ -162,7 +162,7 @@ const DSATable: React.FC<DSATableProps> = ({
       key: "problemName",
       header: "Problem Name",
       width: "25%",
-      render: (value: string, row: DSAProblem) => (
+      render: (value: string, row: any) => (
         <div className="flex flex-col">
           <span className="font-medium text-blue-600 dark:text-blue-400">
             {value}
@@ -186,7 +186,7 @@ const DSATable: React.FC<DSATableProps> = ({
       key: "notes",
       header: "Notes",
       width: "15%",
-      render: (value: string, row: DSAProblem) => (
+      render: (value: string, row: any) => (
         <div className="flex items-center">
           <button
             onClick={() => openNotesModal(row.id, value)}
@@ -212,7 +212,7 @@ const DSATable: React.FC<DSATableProps> = ({
       key: "links",
       header: "Links",
       width: "20%",
-      render: (_, row: DSAProblem) => (
+      render: (_, row: any) => (
         <div className="flex space-x-3">
           {row.leetcodeLink && (
             <a
@@ -244,7 +244,7 @@ const DSATable: React.FC<DSATableProps> = ({
       key: "status",
       header: "Status",
       width: "15%",
-      render: (value: ProblemStatus, row: DSAProblem) => (
+      render: (value: ProblemStatus, row: any) => (
         <div className="relative">
           <button
             onClick={() => toggleStatusDropdown(row.id)}
@@ -369,8 +369,8 @@ const DSATable: React.FC<DSATableProps> = ({
                     }`}
                   >
                     {column.render
-                      ? column.render(row[column.key], row)
-                      : String(row[column.key])}
+                      ? column.render(row[column.key as keyof DSAProblem], row)
+                      : String(row[column.key as keyof DSAProblem])}
                   </td>
                 ))}
               </tr>

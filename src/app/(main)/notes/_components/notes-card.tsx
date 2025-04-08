@@ -1,5 +1,5 @@
-'use client'
-import { FiEdit2, FiTrash2, FiExternalLink, FiBookmark } from "react-icons/fi";
+"use client";
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -9,33 +9,31 @@ const difficultyColors = {
   Hard: "text-red-600 dark:text-red-400",
 };
 
+type Difficulty = "Easy" | "Medium" | "Hard";
+
 interface NoteProblem {
-    id: number;
-    name: string;
-    difficulty: "Easy" | "Medium" | "Hard";
-    tags: string[];
+  id: number;
+  name: string;
+  difficulty: Difficulty;
+  tags: string[];
 }
 
-export default function NotesCard({
-  note,
-}: {
-  note: {
-    id: number;
-    problem: NoteProblem;
-    lastUpdated: string;
-    content: string;
-  };
-}) {
-    const [openModal, setOpenModal] = useState(false);
+export interface Note {
+  id: number;
+  problem: NoteProblem;
+  lastUpdated: string;
+  content: string;
+}
 
-
+export default function NotesCard({ note }: { note: Note }) {
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <div className="relative group bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
-        {openModal && (
+      {openModal && (
         <div
           className="fixed inset-0 bg-black/40 flex items-center justify-center z-30 p-4"
-          onClick={openModal ? () => setOpenModal(false) : undefined}   
+          onClick={openModal ? () => setOpenModal(false) : undefined}
         >
           <div
             className="relative bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-2xl w-full p-6 z-40"
@@ -49,7 +47,7 @@ export default function NotesCard({
               value={note.content}
               onChange={(e) =>
                 // setNotesModal({ ...notesModal, currentNotes: e.target.value })
-                note.content = e.target.value
+                (note.content = e.target.value)
               }
               className="w-full h-40 p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
               placeholder="Add your notes here..."
@@ -57,13 +55,13 @@ export default function NotesCard({
 
             <div className="mt-4 flex justify-end space-x-3">
               <button
-                onClick={()=> setOpenModal(false)}
+                onClick={() => setOpenModal(false)}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
               >
                 Cancel
               </button>
               <button
-                onClick={()=>{}}
+                onClick={() => {}}
                 className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md dark:bg-blue-700 dark:hover:bg-blue-800"
               >
                 Save Notes
@@ -113,14 +111,19 @@ export default function NotesCard({
 
       {/* Note content - now the main focus */}
       <div className="px-5 pb-5 flex-1">
-        <div className="relative bg-gray-50 dark:bg-gray-700/30 rounded-lg p-4 h-full " onClick={()=>{setOpenModal(true)}}>
+        <div
+          className="relative bg-gray-50 dark:bg-gray-700/30 rounded-lg p-4 h-full "
+          onClick={() => {
+            setOpenModal(true);
+          }}
+        >
           {/* Note content with subtle parchment-like background */}
           <div className="absolute inset-0 bg-[url('/note-pattern.svg')] opacity-10 dark:opacity-5"></div>
 
           {/* Actual note content */}
           <div className="relative h-full">
             <p className="text-gray-800 dark:text-gray-200 font-light leading-relaxed">
-              {note.content.substring(0,60)}...
+              {note.content.substring(0, 60)}...
             </p>
           </div>
         </div>

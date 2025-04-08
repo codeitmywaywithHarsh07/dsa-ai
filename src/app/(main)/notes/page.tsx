@@ -1,6 +1,6 @@
 "use client";
 import { FaBook, FaNoteSticky } from "react-icons/fa6";
-import NotesCard from "./_components/notes-card";
+import NotesCard, { Note } from "./_components/notes-card";
 import NotesFilter from "./_components/notes-filter";
 import Container from "@/components/Container";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import NotesEmptyState from "./_components/empty-state";
 
 export default function NotesPage() {
   // Sample data - in a real app, this would come from your database/state
-  const [notes, setNotes] = useState([
+  const [notes, setNotes] = useState<Note[]>([
     {
     id: 1,
     problem: {
