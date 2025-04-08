@@ -2,15 +2,15 @@ import Container from "@/components/Container";
 import React from "react";
 import ProblemView from "./_components/problem-view";
 
-interface PageProps {
-  params: { topic: string };
-}
 
-const Page = async ({ params }: PageProps) => {
+const Page = async ({ params }: { params: Promise<{ topic: string }> }) => {
   // const data = await fetchSomething(params.topic); if needed
+  const {topic} = await params
+
+  console.log(`Fetching data for topic: ${topic}`);
   return (
     <Container>
-      <ProblemView topic={params.topic} />
+      <ProblemView topic={topic} />
     </Container>
   );
 };
