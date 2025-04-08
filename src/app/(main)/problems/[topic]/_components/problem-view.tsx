@@ -2,7 +2,7 @@
 import DSATable, { DSAProblem } from "@/components/Table";
 import React, { useState } from "react";
 
-const ProblemView = () => {
+const ProblemView = ({topic}:{topic:string}) => {
   const [problems, setProblems] = useState<DSAProblem[]>([
     {
       id: 1,
