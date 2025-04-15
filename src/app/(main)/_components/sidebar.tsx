@@ -24,11 +24,11 @@ export default function Sidebar() {
   return (
     <div className="w-64 h-screen bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 fixed">
       <div className="p-4 flex flex-col gap-8">
-        <div className="flex gap-4 items-center w-full justify-center">
+        <div className="flex gap-2 items-center w-full justify-center -ml-4">
           <img src="/logo-new.png" alt="Dsai" className="size-12" />
-          {/* <h1 className="text-xl pl-16 font-bold text-gray-900 dark:text-white mb-8">
-          DSAi
-        </h1> */}
+          <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+            DSAi
+          </h1>
         </div>
         <nav>
           <ul className="space-y-2">
@@ -37,7 +37,7 @@ export default function Sidebar() {
                 <Link
                   href={item.href}
                   className={`flex items-center p-3 rounded-lg transition-colors cursor-pointer ${
-                    pathname === item.href
+                    pathname === item.href || pathname.startsWith(item.href)
                       ? "bg-gray-200 text-gray-700 dark:bg-blue-900/30 dark:text-blue-400"
                       : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                   }`}

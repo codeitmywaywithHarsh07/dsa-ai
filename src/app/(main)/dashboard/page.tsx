@@ -1,12 +1,12 @@
-export default function DashboardPage() {
+import React from "react";
+import DashboardMain from "./_components/dashboard-main";
+
+const Dashboard = () => {
   return (
-    <div className="ml-64 p-6">
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-        Dashboard Overview
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Add dashboard widgets here */}
-      </div>
-    </div>
-  )
-}
+    <>
+      <DashboardMain />
+    </>
+  );
+};
+
+export default Dashboard;

@@ -12,21 +12,39 @@ import {
 import { SiGeeksforgeeks, SiLeetcode } from "react-icons/si";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { CgNotes } from "react-icons/cg";
+import { useRouter } from "next/navigation";
+import { FaBookmark } from "react-icons/fa6";
 
-export type ProblemStatus = "Not Started" | "In Progress" | "Completed" | "Revisited";
+export type ProblemStatus =
+  | "Not Started"
+  | "In Progress"
+  | "Completed"
+  | "Revisited";
 
 export type DSAProblem = {
   id: number;
+  problem_slug: string;
   problemName: string;
-  difficulty: "Easy" | "Medium" | "Hard";
+  description: string;
+  difficulty: Difficulty;
+  topics: string[];
   notes: string;
   leetcodeLink?: string;
   gfgLink?: string;
   status: ProblemStatus;
   lastRevised?: string;
   isBookmarked?: boolean;
+  isFavorite?: boolean;
+  upvotes?: number;
+  solution?: string;
+  constraints?: string[];
+  examples?: {
+    input: string;
+    output: string;
+    explanation?: string;
+  }[];
 };
-
+export type Difficulty = "Easy" | "Medium" | "Hard";
 type ColumnDefinition<T, K extends keyof T> = {
   key: K;
   header: string;
@@ -37,6 +55,7 @@ type ColumnDefinition<T, K extends keyof T> = {
 
 type DSATableProps = {
   data: DSAProblem[];
+  topic: string;
   onNotesUpdate: (id: number, notes: string) => void;
   onStatusUpdate: (id: number, status: ProblemStatus) => void;
   onBookmarkToggle: (id: number, isBookmarked: boolean) => void;
@@ -64,6 +83,7 @@ const DSATable: React.FC<DSATableProps> = ({
   onNotesUpdate,
   onStatusUpdate,
   onBookmarkToggle,
+  topic,
 }) => {
   const [notesModal, setNotesModal] = useState<{
     isOpen: boolean;
@@ -74,6 +94,7 @@ const DSATable: React.FC<DSATableProps> = ({
     problemId: null,
     currentNotes: "",
   });
+  const router = useRouter();
 
   const [statusDropdown, setStatusDropdown] = useState<{
     isOpen: boolean;
@@ -150,7 +171,7 @@ const DSATable: React.FC<DSATableProps> = ({
           aria-label={value ? "Remove bookmark" : "Add bookmark"}
         >
           {value ? (
-            <FiStar className="text-yellow-500 fill-yellow-500" />
+            <FaBookmark className="text-yellow-500 fill-yellow-500" />
           ) : (
             <FiBookmark className="text-gray-400 hover:text-yellow-500" />
           )}
@@ -162,13 +183,20 @@ const DSATable: React.FC<DSATableProps> = ({
       key: "problemName",
       header: "Problem Name",
       width: "25%",
-      render: (value: string, row: any) => (
-        <div className="flex flex-col">
-          <span className="font-medium text-blue-600 dark:text-blue-400">
-            {value}
-          </span>
-        </div>
-      ),
+      render: (value: string, row: any) => {
+
+        const handleClick = () => {
+          const slug = row.problem_slug;
+          router.push(`/problems/${topic}/${slug}`);
+        };
+        return (
+          <div className="flex flex-col cursor-pointer" onClick={handleClick}>
+            <span className="font-medium text-blue-600 dark:text-blue-400">
+              {value}
+            </span>
+          </div>
+        );
+      },
     },
     {
       key: "difficulty",
@@ -196,7 +224,7 @@ const DSATable: React.FC<DSATableProps> = ({
               <>
                 {/* <FiEdit2 className="mr-1" />
                 <span className="truncate max-w-xs">{value}</span> */}
-                <CgNotes className="ml-3 size-4"/>
+                <CgNotes className="ml-3 size-4" />
               </>
             ) : (
               <>
@@ -219,7 +247,7 @@ const DSATable: React.FC<DSATableProps> = ({
               href={row.leetcodeLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center text-sm text-orange-500 hover:text-orange-700 dark:hover:text-orange-400"
+              className="flex font-bold items-center text-sm text-orange-500 hover:text-orange-700 dark:hover:text-orange-400"
             >
               <SiLeetcode className="mr-1" />
               LeetCode
@@ -230,7 +258,7 @@ const DSATable: React.FC<DSATableProps> = ({
               href={row.gfgLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center text-sm text-green-600 hover:text-green-800 dark:hover:text-green-400"
+              className="flex font-bold items-center text-sm text-green-600 hover:text-green-700 dark:hover:text-green-400"
             >
               <SiGeeksforgeeks className="mr-1" />
               GFG

@@ -50,25 +50,15 @@ export default function TopicCard({ topic }: {
             </p>
 
             {/* Progress */}
-            <div className="mb-3">
+            <div className="mb-3 flex flex-col gap-2">
               <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
-                <span>Progress</span>
-                <span>{topic.completedQuestions}/{topic.totalQuestions} solved</span>
+                <span className='text-md'>Progress</span>
+                <span className='text-gray-800 font-bold text-md'>{topic.completedQuestions}/{topic.totalQuestions} solved</span>
               </div>
               <ProgressBar value={progress} />
             </div>
 
-            {/* Difficulty */}
-            {topic.difficulty && (
-              <div className="mt-4 flex justify-end">
-                <span className={cn(
-                  "text-xs font-medium px-2 py-1 rounded-full shadow-sm",
-                  difficultyColors[topic.difficulty]
-                )}>
-                  {topic.difficulty.charAt(0).toUpperCase() + topic.difficulty.slice(1)}
-                </span>
-              </div>
-            )}
+        
           </div>
 
           {/* Fancy Hover Border */}
