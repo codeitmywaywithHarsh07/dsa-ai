@@ -1,7 +1,10 @@
+
 "use client";
-import { useState } from "react";
-import AuthModal from "./auth-modal";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { FiArrowRight } from "react-icons/fi";
+import AuthModal from "./auth-modal";
+// import { Button } from "@/components/ui/button";
 
 export default function HeroSection() {
   const router = useRouter();
@@ -12,36 +15,33 @@ export default function HeroSection() {
     setIsAuthenticated(true);
     setShowAuthModal(false);
   };
-
   return (
-    <div className="relative overflow-hidden">
-      <div className="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
-            <span className="block">Master Data Structures</span>
-            <span className="block text-blue-600 dark:text-blue-400">
-              And Algorithms
-            </span>
+    <div className="relative bg-gradient-to-r from-blue-950 to-blue-800 dark:from-blue-800 dark:to-blue-700 overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32">
+        <div className="relative z-10 text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Master DSA with <span className="text-blue-200">Confidence</span>
           </h1>
-          <p className="mt-3 max-w-md mx-auto text-base text-gray-500 dark:text-gray-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-            Track your progress, solve problems efficiently, and ace your coding
-            interviews.
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+            Track your progress, solve problems efficiently, and ace your coding interviews with our comprehensive platform.
           </p>
-          <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-            <div className="rounded-md shadow">
-              <div
-                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
-                onClick={() => {
+          <div className="flex flex-col sm:flex-row justify-center gap-4" onClick={() => {
                   setShowAuthModal(true);
-                }}
-              >
-                Get Started
-              </div>
-            </div>
+                }}>
+            <button className="px-8 py-4 bg-white text-blue-600 hover:bg-blue-50 font-medium rounded-lg text-lg">
+              Get Started
+              <FiArrowRight className="ml-2" />
+            </button>
+            <button  className="px-8 py-4 bg-transparent border-white text-white hover:bg-white/10 font-medium rounded-lg text-lg">
+              Learn More
+            </button>
           </div>
         </div>
+        
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-1/4 w-72 h-72 bg-blue-400/20 rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-purple-400/20 rounded-full filter blur-3xl"></div>
       </div>
-
       {showAuthModal && (
         <div className="flex absolute items-center justify-center min-h-screen">
           <AuthModal

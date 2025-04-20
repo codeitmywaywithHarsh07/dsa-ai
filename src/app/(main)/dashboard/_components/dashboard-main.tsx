@@ -44,14 +44,14 @@ export default function DashboardMain() {
               Here's your coding progress
             </p>
           </div>
-          <div className="flex items-center space-x-4">
+          {/* <div className="flex items-center space-x-4">
             <button className="p-2 rounded-full bg-white dark:bg-gray-800 shadow hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
               <FaSyncAlt className="text-gray-600 dark:text-gray-300" />
             </button>
             <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-gray-600 to-gray-900 flex items-center justify-center text-white font-bold">
               JD
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Profile Card */}
