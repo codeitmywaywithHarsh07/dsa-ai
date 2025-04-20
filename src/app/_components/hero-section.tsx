@@ -1,4 +1,3 @@
-
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -23,21 +22,25 @@ export default function HeroSection() {
             Master DSA with <span className="text-blue-200">Confidence</span>
           </h1>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-            Track your progress, solve problems efficiently, and ace your coding interviews with our comprehensive platform.
+            Track your progress, solve problems efficiently, and ace your coding
+            interviews with our comprehensive platform.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4" onClick={() => {
-                  setShowAuthModal(true);
-                }}>
-            <button className="px-8 py-4 bg-white text-blue-600 hover:bg-blue-50 font-medium rounded-lg text-lg">
+          <div
+            className="flex flex-col sm:flex-row justify-center gap-4"
+            onClick={() => {
+              setShowAuthModal(true);
+            }}
+          >
+            <button className="px-8 py-3 flex items-center font-semibold bg-white text-blue-600 hover:bg-blue-50 rounded-lg text-lg">
               Get Started
               <FiArrowRight className="ml-2" />
             </button>
-            <button  className="px-8 py-4 bg-transparent border-white text-white hover:bg-white/10 font-medium rounded-lg text-lg">
+            <button className="px-8 py-3 bg-transparent border-white text-white hover:bg-white/10 font-medium rounded-lg text-lg">
               Learn More
             </button>
           </div>
         </div>
-        
+
         {/* Decorative elements */}
         <div className="absolute top-0 left-1/4 w-72 h-72 bg-blue-400/20 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-purple-400/20 rounded-full filter blur-3xl"></div>
@@ -48,7 +51,7 @@ export default function HeroSection() {
             show={showAuthModal}
             onClose={() => setShowAuthModal(false)} // Redirect if closed
             type="out"
-            />
+          />
         </div>
       )}
     </div>
